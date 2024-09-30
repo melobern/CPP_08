@@ -37,18 +37,8 @@ int main(int, char **) {
     try {
         std::cout << "Find 5: " << easyfind(vec, 5) << std::endl;
         std::cout << "Find 10: " << easyfind(vec, 10) << std::endl;
-    } catch (std::exception &e) {
+    } catch (notFound &e) {
         std::cout << e.what() << std::endl;
     }
-    std::cout << CYAN << "Test with a vector of string" << RESET << std::endl;
-    std::vector<std::string> vec2;
-    vec2.push_back("Hello");
-    vec2.push_back("World");
-    vec2.push_back("!");
-    std::cout << "Vector: ";
-    for (int i = 0; i < 3; i++) {
-        std::cout << vec2[i] << " ";
-    }
-    std::cout << std::endl;
   return 0;
 }

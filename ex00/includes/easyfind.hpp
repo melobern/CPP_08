@@ -13,6 +13,7 @@
 #ifndef EX02_INCLUDES_EASYFIND_HPP_
 #define EX02_INCLUDES_EASYFIND_HPP_
 # include <iostream>
+# include <exception>
 # include <algorithm>
 # include <vector>
 # include <list>
@@ -20,5 +21,10 @@
 
 template<typename T>
 int easyfind(T container, int num);
+
+class notFound : std::exception {
+  public:
+    virtual const char *what() const throw();
+};
 #include "easyfind.tpp"
 #endif  //  EX02_INCLUDES_EASYFIND_HPP_

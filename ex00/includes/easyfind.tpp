@@ -20,9 +20,11 @@ template <typename T>
 int easyfind(T container, int num) {
     typename T::iterator it = std::find(container.begin(), container.end(), num);
     if (it == container.end()) {
-        std::cerr << RED << "Error: " << num << " not found in container.";
-        std::cerr << RESET << std::endl;
-        return (-1);
+        throw notFound();
     }
  return (num);
+}
+
+const char* notFound::what() const throw() {
+    return (RED "Error: value not found in container." RESET);
 }

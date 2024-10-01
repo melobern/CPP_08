@@ -82,7 +82,8 @@ static std::vector<int> createRandomNumbersRange(int count) {
   std::vector<int> randomNumbers;
   unsigned int seed = time(NULL);
   rand_r(&seed);
-  for (int i = 0; i < count; i++) randomNumbers.push_back(rand_r(&seed) % count);
+  for (int i = 0; i < count; i++)
+      randomNumbers.push_back(rand_r(&seed) % count);
   return (randomNumbers);
 }
 

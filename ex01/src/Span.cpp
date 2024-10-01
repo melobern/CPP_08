@@ -6,11 +6,11 @@
 /*   By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:19:44 by mbernard          #+#    #+#             */
-/*   Updated: 2024/09/30 17:16:02 by mbernard         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:56:56 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Span.hpp"
+#include "../includes/Span.hpp"
 
 #define RED "\033[1;31m"
 #define RESET "\033[0m"
@@ -41,23 +41,60 @@ Span::~Span() {
     return;
 }
 
-const char* Span::spanFullException::what() const throw() {
-    return (RED "Error : span is full." RESET);
-}
-
 void              Span::addNumber(const int n) {
-  if (this->_arr.size() == size)
+  if (this->_arr.size() == static_cast<unsigned int>(this->_size))
     throw spanFullException();
   this->_arr.push_back(n);
 }
 
-unsigned int      Span::shortestSpan(void); {
+unsigned int      Span::shortestSpan(void) {
+  if (this->_arr.size() == 0)
+    throw noNumberException();
+  if (this->_arr.size() == 1)
+    throw oneNumberException();
+
+  std::vector<int> copy = this->_arr;
+  std::sort(copy.begin(), copy.end());
+  unsigned int shortest = copy.at(1) - copy.at(0);
+  std::vector<int>::iterator it = copy.begin();
+  std::vector<int>::iterator end = copy.end();
+
+  while (*it < *end - 1) {
+    unsigned int tmp = copy.at(*it + 1) - copy.at(*it);
+    if (tmp < shortest)
+      shortest = tmp;
+    it++;
+  }  
+  if (shortest == 0)
+    throw sameNumberException();
+  return(shortest);
 }
 
-unsigned int      Span::longestSpan(void); {
+unsigned int Span::longestSpan(void) {
+  if (this->_arr.size() == 0)
+    throw noNumberException();
+  if (this->_arr.size() == 1)
+    throw oneNumberException();
+  int min = *std::min_element(this->_arr.begin(), this->_arr.end());
+  int max = *std::max_element(this->_arr.begin(), this->_arr.end());
+  if (min == max)
+    throw sameNumberException();
+  return (max - min); 
 }
 
-class spanFullException : std::exception {
- public:
-  virtual const char* what() const throw();
+const char* Span::spanFullException::what() const throw() {
+  return (RED "Error : span is full" RESET);
 }
+
+const char* Span::noNumberException::what() const throw() {
+  return (RED "Error : span is empty" RESET);
+}
+
+const char* Span::oneNumberException::what() const throw() {
+  return (RED "Error : only one number in the span" RESET);
+}
+
+const char* Span::sameNumberException::what() const throw() {
+  return (RED "Error : numbers are equal in the span" RESET);
+}
+

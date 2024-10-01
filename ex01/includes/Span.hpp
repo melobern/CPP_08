@@ -6,7 +6,7 @@
 /*   By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:25:30 by mbernard          #+#    #+#             */
-/*   Updated: 2024/09/30 17:05:34 by mbernard         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:19:08 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class Span {
  private:
   const int               _size;
   std::vector<int>        _arr;
+  Span(void);
 
  public:
   explicit Span(const int n);
@@ -34,10 +35,22 @@ class Span {
   unsigned int               shortestSpan(void);
   unsigned int               longestSpan(void);
 
-  class spanFullException : std::exception {
+  class spanFullException : public std::exception {
    public:
     virtual const char* what() const throw();
-  }
+  };
+  class oneNumberException : public std::exception {
+   public:
+    virtual const char* what() const throw();
+  };
+  class noNumberException : public std::exception {
+   public:
+    virtual const char* what() const throw();
+  };
+  class sameNumberException : public std::exception {
+   public:
+    virtual const char* what() const throw();
+  };
 };
 
 #endif  //  EX02_INCLUDES_EASYFIND_HPP_

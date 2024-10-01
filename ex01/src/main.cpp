@@ -6,7 +6,7 @@
 /*   By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 09:29:57 by mbernard          #+#    #+#             */
-/*   Updated: 2024/09/27 09:10:39 by mbernard         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:09:49 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,56 @@
 #include <iostream>
 #include <string>
 
-
-#include "../includes/easyfind.hpp"
+#include "../includes/Span.hpp"
 
 #define CYAN "\033[0;36m"
 #define RESET "\033[0m"
+void subjectTests(void) {
+  std::cout << CYAN "------------Subject tests------------" RESET << std::endl;
+  Span sp = Span(5);
+  sp.addNumber(6);
+  sp.addNumber(3);
+  sp.addNumber(17);
+  sp.addNumber(9);
+  sp.addNumber(11);
+  std::cout << sp.shortestSpan() << std::endl;
+  std::cout << sp.longestSpan() << std::endl;
+}
 
-
-int main(int, char **) {
-    std::srand(std::time(NULL));
-    std::cout << CYAN << "Test with a vector of int" << RESET << std::endl;
-    std::vector<int> vec;
-    for (int i = 0; i < 10; i++) {
-        vec.push_back(std::rand() % 10);
-    }
-    std::cout << "Vector: ";
-    for (int i = 0; i < 10; i++) {
-        std::cout << vec[i] << " ";
-    }
-    std::cout << std::endl;
+void exceptionTests(void) {
+  std::cout << CYAN "-----------Exception tests-----------" RESET << std::endl;
+  Span sp = Span(5);
+  try {
+    sp.shortestSpan();
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+  sp.addNumber(5);
+  try {
+    sp.longestSpan();
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+  sp.addNumber(5);
+  try {
+    sp.longestSpan();
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+    sp.addNumber(6);
     try {
-        std::cout << "Find 5: " << easyfind(vec, 5) << std::endl;
-        std::cout << "Find 10: " << easyfind(vec, 10) << std::endl;
-    } catch (notFound &e) {
-        std::cout << e.what() << std::endl;
-    }
-  return 0;
+    sp.longestSpan();
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+  try {
+    sp.addNumber(5);
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+}
+int main(void) {
+  subjectTests();
+  exceptionTests();
+  return (0);
 }

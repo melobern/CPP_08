@@ -6,7 +6,7 @@
 #    By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/24 21:33:43 by mbernard          #+#    #+#              #
-#    Updated: 2024/09/30 16:13:07 by mbernard         ###   ########.fr        #
+#    Updated: 2024/10/01 09:11:19 by mbernard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ MKDIR = mkdir -p
 RMDIR = rm -rf
 
 # ---------------------------------- Sources --------------------------------- #
-HEADER = span
-SRCS = main
+HEADER = Span
+SRCS = main Span
 
 # ---------------------------------- Repertories ----------------------------- #
 HEADERS_DIR = includes/
@@ -26,7 +26,6 @@ SRC_DIR = src/
 OBJS_DIR = .objs/
 OBJS = $(addprefix ${OBJS_DIR}, $(addsuffix .o, ${SRCS}))
 HEADERS = $(addprefix ${HEADERS_DIR}, $(addsuffix .hpp, ${HEADERS_LIST}))
-HEADERS += $(addprefix ${HEADERS_DIR}, $(addsuffix .tpp, ${HEADERS_LIST}))
 INCLUDES = -I ${HEADERS_DIR}
 DEPS = ${OBJS:.o=.d}
 

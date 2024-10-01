@@ -56,15 +56,12 @@ unsigned int      Span::shortestSpan(void) {
   std::vector<int> copy = this->_arr;
   std::sort(copy.begin(), copy.end());
   unsigned int shortest = copy.at(1) - copy.at(0);
-  std::vector<int>::iterator it = copy.begin();
-  std::vector<int>::iterator end = copy.end();
 
-  while (*it < *end - 1) {
-    unsigned int tmp = copy.at(*it + 1) - copy.at(*it);
+  for (size_t i = 0; i < copy.size() - 1; ++i) {
+    unsigned int tmp = copy.at(i + 1) - copy.at(i);
     if (tmp < shortest)
       shortest = tmp;
-    it++;
-  }  
+  }
   if (shortest == 0)
     throw sameNumberException();
   return(shortest);

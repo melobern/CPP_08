@@ -1,4 +1,4 @@
-/* Copyright 2024 <mbernard>*************************************************  */
+/* Copyright 2024 <mbernard>************************************************  */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
@@ -76,7 +76,7 @@ unsigned int Span::longestSpan(void) {
   int max = *std::max_element(this->_arr.begin(), this->_arr.end());
   if (min == max)
     throw sameNumberException();
-  return (max - min); 
+  return (max - min);
 }
 
 const char* Span::spanFullException::what() const throw() {

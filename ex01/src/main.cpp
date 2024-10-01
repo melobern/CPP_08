@@ -60,51 +60,53 @@ static void exceptionTests(void) {
   sp.addNumber(5);
   sp.addNumber(6);
   try {
-      sp.shortestSpan();
+    sp.shortestSpan();
   } catch (std::exception &e) {
-      std::cout << e.what() << std::endl;
+    std::cout << e.what() << std::endl;
   }
   std::cout << YELLOW "-------------Full span-------------" RESET << std::endl;
   try {
-    while (true)
-      sp.addNumber(5);
+    while (true) sp.addNumber(5);
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
 }
 
-static std::vector< int > createFollowingNumbersRange(int count) {
-	std::vector< int > followers;
-	for (int i = 0; i < count; i++)
-		followers.push_back(i);
-	return (followers);
+static std::vector<int> createFollowingNumbersRange(int count) {
+  std::vector<int> followers;
+  for (int i = 0; i < count; i++) followers.push_back(i);
+  return (followers);
 }
 
-static std::vector< int > createRandomNumbersRange(int count) {
-	std::vector< int > randomNumbers;
-    srand(time(NULL));
-	for (int i = 0; i < count; i++)
-		randomNumbers.push_back(rand() % count);
-	return (randomNumbers);
+static std::vector<int> createRandomNumbersRange(int count) {
+  std::vector<int> randomNumbers;
+  unsigned int seed = time(NULL);
+  rand_r(&seed);
+  for (int i = 0; i < count; i++) randomNumbers.push_back(rand_r(&seed) % count);
+  return (randomNumbers);
 }
+
 static void millionTests(void) {
-    std::cout << CYAN "------------Million tests-----------" RESET << std::endl;
-    std::cout << YELLOW "----------Following range---------" RESET << std::endl;
-    Span sp = Span(1000001);
-    std::vector<int> range = createFollowingNumbersRange(1000001);
-    sp.addRange< std::vector< int > >(range.begin(), range.end());
-    std::cout << sp.shortestSpan() << std::endl;
-    std::cout << sp.longestSpan() << std::endl;
-    std::cout << YELLOW "----------Random range----------" RESET << std::endl;
-    std::vector<int> randomNumbers = createRandomNumbersRange(1000001);
-    Span sp2 = Span(1000001);
-    sp2.addRange< std::vector< int > >(randomNumbers.begin(), randomNumbers.end());
-    try {
-        std::cout << "Longest in random span : " << sp2.longestSpan() << std::endl;
-        std::cout << "Shortest in random span : " << sp2.shortestSpan() << std::endl;
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
+  std::cout << CYAN "------------Million tests-----------" RESET << std::endl;
+
+  std::cout << YELLOW "----------Following range---------" RESET << std::endl;
+  Span sp = Span(1000001);
+  std::vector<int> range = createFollowingNumbersRange(1000001);
+  sp.addRange<std::vector<int> >(range.begin(), range.end());
+  std::cout << sp.shortestSpan() << std::endl;
+  std::cout << sp.longestSpan() << std::endl;
+
+  std::cout << YELLOW "----------Random range-----------" RESET << std::endl;
+  std::vector<int> randomNumbers = createRandomNumbersRange(1000001);
+  Span sp2 = Span(1000001);
+  sp2.addRange<std::vector<int> >(randomNumbers.begin(), randomNumbers.end());
+  try {
+    std::cout << "Longest in random span : " << sp2.longestSpan() << std::endl;
+    std::cout << "Shortest in random span : " << sp2.shortestSpan()
+              << std::endl;
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
 }
 
 int main(void) {

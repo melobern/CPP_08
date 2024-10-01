@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EX02_INCLUDES_EASYFIND_HPP_
-#define EX02_INCLUDES_EASYFIND_HPP_
+#ifndef EX01_INCLUDES_SPAN_HPP_
+#define EX01_INCLUDES_SPAN_HPP_
 # include <iostream>
 # include <exception>
 # include <algorithm>
@@ -34,7 +34,7 @@ class Span {
   void                       addNumber(const int n);
   unsigned int               shortestSpan(void);
   unsigned int               longestSpan(void);
-  
+
   template<typename T>
   void addRange(typename T::const_iterator begin, typename T::const_iterator end) {
     size_t len = std::distance(begin, end);
@@ -43,6 +43,7 @@ class Span {
       throw spanFullException();
     this->_arr.insert(this->_arr.end(), begin, end);
   }
+  
   class spanFullException : public std::exception {
    public:
     virtual const char* what() const throw();
@@ -61,4 +62,4 @@ class Span {
   };
 };
 
-#endif  //  EX02_INCLUDES_EASYFIND_HPP_
+#endif  //  EX01_INCLUDES_SPAN_HPP_

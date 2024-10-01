@@ -44,6 +44,7 @@ class Span {
     this->_arr.insert(this->_arr.end(), begin, end);
   }
 
+  void printSpan(void);
   class spanFullException : public std::exception {
    public:
     virtual const char* what() const throw();

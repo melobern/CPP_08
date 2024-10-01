@@ -108,6 +108,25 @@ static void millionTests(void) {
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
+
+  std::cout << YELLOW "----------Printable range-----------" RESET << std::endl;
+  std::vector<int> randomNbs2 = createRandomNumbersRange(100);
+  Span sp3 = Span(100);
+  sp3.addRange<std::vector<int> >(randomNbs2.begin(), randomNbs2.end());
+  sp3.printSpan();
+  try {
+    std::cout << "Longest in random span : " << sp3.longestSpan() << std::endl;
+    std::cout << "Shortest in random span : " << sp3.shortestSpan()
+              << std::endl;
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+  std::cout << YELLOW "--Adding a range to a full range--" RESET << std::endl;
+  try {
+    sp3.addRange<std::vector<int> >(randomNbs2.begin(), randomNbs2.end());
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
 }
 
 int main(void) {

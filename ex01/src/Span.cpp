@@ -61,9 +61,10 @@ unsigned int      Span::shortestSpan(void) {
     unsigned int tmp = copy.at(i + 1) - copy.at(i);
     if (tmp < shortest)
       shortest = tmp;
+    if (shortest == 0) {
+      throw sameNumberException();
+    }
   }
-  if (shortest == 0)
-    throw sameNumberException();
   return(shortest);
 }
 
@@ -94,4 +95,14 @@ const char* Span::oneNumberException::what() const throw() {
 const char* Span::sameNumberException::what() const throw() {
   return (RED "Error : numbers are equal in the span" RESET);
 }
+
+  void Span::printSpan(void) {
+    for (size_t i = 0; i < this->_arr.size(); ++i) {
+      std::cout << this->_arr.at(i) << "\t";
+      if (i % 10 == 9 && i != this->_arr.size() - 1)
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+  }
+
 

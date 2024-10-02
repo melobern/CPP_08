@@ -103,8 +103,8 @@ void copyTest(void) {
 }
 
 void otherTypesTest(void) {
-  std::cout << std::endl
-            << YELLOW << "Test with other types " << RESET << std::endl;
+  std::cout << std::endl;
+  std::cout << YELLOW << "Test with other types " << RESET << std::endl;
   {
     std::cout << CYAN << "Elements type: char" << RESET << std::endl;
     MutantStack<char> mstack;

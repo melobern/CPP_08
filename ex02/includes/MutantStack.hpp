@@ -6,7 +6,7 @@
 /*   By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:02:08 by mbernard          #+#    #+#             */
-/*   Updated: 2024/10/01 15:02:52 by mbernard         ###   ########.fr       */
+/*   Updated: 2024/10/02 09:16:39 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,33 @@
 # include <vector>
 # include <list>
 # include <deque>
+# include <stack>
 
-class MutantStack {
- private:
-  const int               _size;
-  std::vector<int>        _arr;
-  MutantStack(void);
-
+template <typename T>
+class MutantStack : public std::stack<T> {
  public:
-  explicit MutantStack(const int n);
+  MutantStack(void);
   MutantStack(const MutantStack &src);
-  MutantStack &operator=(const MutantStack &src);
-  ~MutantStack();
+  MutantStack <T> &operator=(const MutantStack &src);
+  ~MutantStack(void);
 
-  void                       addNumber(const int n);
-  unsigned int               shortestMutantStack(void);
-  unsigned int               longestMutantStack(void);
+  typedef typename std::stack<T>::container_type::iterator iterator;
+  typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+  typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
+  typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
 
-  template<typename T>
-  void addRange(typename T::const_iterator begin, typename T::const_iterator end) {
-    size_t len = std::distance(begin, end);
+  iterator begin(void) { return this->c.begin(); }
+  iterator end(void) { return this->c.end(); }
+  const_iterator begin(void) const { return this->c.begin(); }
+  const_iterator end(void) const { return this->c.end(); }
 
-    if (this->_arr.size() + len > static_cast<unsigned int>(this->_size))
-      throw spanFullException();
-    this->_arr.insert(this->_arr.end(), begin, end);
-  }
+  reverse_iterator rbegin(void) { return this->c.rbegin(); }
+  reverse_iterator rend(void) { return this->c.rend(); }
+  const_reverse_iterator rbegin(void) const { return this->c.rbegin(); }
+  const_reverse_iterator rend(void) const { return this->c.rend(); }
 
-  void printMutantStack(void);
-  class spanFullException : public std::exception {
-   public:
-    virtual const char* what() const throw();
-  };
-  class oneNumberException : public std::exception {
-   public:
-    virtual const char* what() const throw();
-  };
-  class noNumberException : public std::exception {
-   public:
-    virtual const char* what() const throw();
-  };
-  class sameNumberException : public std::exception {
-   public:
-    virtual const char* what() const throw();
-  };
 };
+
+#include "../includes/MutantStack.tpp"
 
 #endif  //  EX02_INCLUDES_MUTANTSTACK_HPP_

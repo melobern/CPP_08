@@ -18,7 +18,7 @@ RMDIR = rm -rf
 
 # ---------------------------------- Sources --------------------------------- #
 HEADER = mutantStack
-SRCS = main mutantStack
+SRCS = main
 
 # ---------------------------------- Repertories ----------------------------- #
 HEADERS_DIR = includes/
@@ -26,6 +26,7 @@ SRC_DIR = src/
 OBJS_DIR = .objs/
 OBJS = $(addprefix ${OBJS_DIR}, $(addsuffix .o, ${SRCS}))
 HEADERS = $(addprefix ${HEADERS_DIR}, $(addsuffix .hpp, ${HEADERS_LIST}))
+HEADERS += $(addprefix ${HEADERS_DIR}, $(addsuffix .tpp, ${HEADERS_LIST}))
 INCLUDES = -I ${HEADERS_DIR}
 DEPS = ${OBJS:.o=.d}
 

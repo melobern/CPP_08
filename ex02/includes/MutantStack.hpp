@@ -42,6 +42,7 @@ class MutantStack : public std::stack<T> {
   reverse_iterator rend(void) { return this->c.rend(); }
   const_reverse_iterator rbegin(void) const { return this->c.rbegin(); }
   const_reverse_iterator rend(void) const { return this->c.rend(); }
+  void             push_back(const T &value) { this->c.push_back(value); }
 };
 
 #include "../includes/MutantStack.tpp"

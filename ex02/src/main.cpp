@@ -34,7 +34,7 @@ static void subjectTests(void) {
   mstack.push(3);
   mstack.push(5);
   mstack.push(737);
-  mstack.push(0);
+  mstack.push_back(0);
   MutantStack<int>::iterator it = mstack.begin();
   MutantStack<int>::iterator ite = mstack.end();
   ++it;
